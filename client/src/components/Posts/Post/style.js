@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
-export const cardContainer = styled.div`
+export const ImageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+export const MessageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-  height: "100%";
+  align-items: flex-start;
 `;

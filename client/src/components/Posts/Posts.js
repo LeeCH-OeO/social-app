@@ -13,7 +13,12 @@ export default function Posts() {
     </MainContainer>
   ) : (
     <MainContainer>
-      <Grid container alignContent="stretch" spacing={3}>
+      <Grid
+        container
+        alignContent="stretch"
+        spacing={3}
+        justifyContent="flex-start"
+      >
         {posts.map((data, index) => {
           return (
             <Grid item key={index} xs={12}>

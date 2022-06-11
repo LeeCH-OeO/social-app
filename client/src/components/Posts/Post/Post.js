@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { deletePost, updatePost, likePost } from "../../../feature/postSlice";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
+import { ImageContainer, MessageContainer } from "./style";
 export default function Post({ post, index }) {
   const disPatch = useDispatch();
   const handleDelete = (id, index) => {
@@ -34,65 +35,49 @@ export default function Post({ post, index }) {
   return (
     <>
       {isEdit ? (
-        <Card
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <input
-            value={editData.creator}
-            onChange={(e) =>
-              setEditData({ ...editData, creator: e.target.value })
-            }
-          />
-          <input
-            value={editData.title}
-            onChange={(e) =>
-              setEditData({ ...editData, title: e.target.value })
-            }
-          />
-          <input
-            value={editData.message}
-            onChange={(e) =>
-              setEditData({ ...editData, message: e.target.value })
-            }
-          />
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              handleEdit(editData, index, post._id);
-            }}
-          >
-            submit
-          </button>
+        <Card>
+          <MessageContainer>
+            <input
+              value={editData.creator}
+              onChange={(e) =>
+                setEditData({ ...editData, creator: e.target.value })
+              }
+            />
+            <input
+              value={editData.title}
+              onChange={(e) =>
+                setEditData({ ...editData, title: e.target.value })
+              }
+            />
+            <input
+              value={editData.message}
+              onChange={(e) =>
+                setEditData({ ...editData, message: e.target.value })
+              }
+            />
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                handleEdit(editData, index, post._id);
+              }}
+            >
+              submit
+            </button>
+          </MessageContainer>
         </Card>
       ) : (
-        <Card
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            border: 1,
-            borderRadius: 2,
-          }}
-        >
-          <Zoom>
-            <CardMedia
-              component="img"
-              image={post.selectedFile}
-              sx={{ width: "75vw" }}
-            />
-          </Zoom>
-          <div
-            sx={{
-              display: "flex",
-              alignItems: "flex-start",
-            }}
-          >
+        <Card sx={{ padding: "1rem" }}>
+          <ImageContainer>
+            <Zoom>
+              <CardMedia
+                component="img"
+                image={post.selectedFile}
+                sx={{ width: "20" }}
+              />
+            </Zoom>
+          </ImageContainer>
+
+          <MessageContainer>
             <Typography> {post.title} </Typography>
             <Typography>{post.creator} </Typography>
             <Typography>{post.message} </Typography>
@@ -123,7 +108,7 @@ export default function Post({ post, index }) {
                 Edit
               </Button>
             </CardActions>
-          </div>
+          </MessageContainer>
         </Card>
       )}
     </>

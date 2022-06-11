@@ -6,7 +6,7 @@ import { Button, Paper, Typography } from "@mui/material";
 import { FileContainer, FormContainer, MainContainer } from "./style";
 export default function Form() {
   const [inputData, setInputData] = useState({
-    creator: "",
+    creator: JSON.parse(localStorage.getItem("userName")),
     title: "",
     message: "",
     tags: "",
@@ -24,7 +24,7 @@ export default function Form() {
       tags: "",
       selectedFile: "",
     });
-    window.location.reload(false);
+    setTimeout(() => window.location.reload(false), 1000);
   };
   return (
     <Paper>
@@ -41,16 +41,7 @@ export default function Form() {
               setInputData({ ...inputData, title: e.target.value });
             }}
           />
-          <TextField
-            margin="dense"
-            fullWidth
-            variant="outlined"
-            value={inputData.creator}
-            label="creator"
-            onChange={(e) => {
-              setInputData({ ...inputData, creator: e.target.value });
-            }}
-          />
+
           <TextField
             margin="dense"
             fullWidth
@@ -86,6 +77,7 @@ export default function Form() {
             />
           </FileContainer>
           <Button
+            disabled={inputData.title || inputData.selectedFile ? false : true}
             onClick={handleSubmit}
             color="primary"
             size="large"

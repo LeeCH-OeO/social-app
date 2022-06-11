@@ -15,7 +15,7 @@ export const postSlice = createSlice({
   reducers: {
     createPost: (state, action) => {
       createNewPost(action.payload);
-      state.value.unshift(action.payload);
+      // state.value.unshift(action.payload);
     },
     getPosts: (state, action) => {
       state.value.unshift(action.payload);
