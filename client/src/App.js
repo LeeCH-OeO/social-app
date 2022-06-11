@@ -40,10 +40,10 @@ function App() {
             alignItems="stretch"
             spacing={3}
           >
-            <Grid item xs={12} sm={7}>
+            <Grid item>
               <Form />
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item>
               <Posts />
             </Grid>
           </Grid>

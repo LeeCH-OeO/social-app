@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import { useDispatch } from "react-redux";
 import { deletePost, updatePost, likePost } from "../../../feature/postSlice";
 import Zoom from "react-medium-image-zoom";
@@ -33,7 +34,14 @@ export default function Post({ post, index }) {
   return (
     <>
       {isEdit ? (
-        <Card>
+        <Card
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <input
             value={editData.creator}
             onChange={(e) =>
@@ -62,39 +70,60 @@ export default function Post({ post, index }) {
           </button>
         </Card>
       ) : (
-        <Card>
+        <Card
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            border: 1,
+            borderRadius: 2,
+          }}
+        >
           <Zoom>
-            <CardMedia component="img" image={post.selectedFile} />
+            <CardMedia
+              component="img"
+              image={post.selectedFile}
+              sx={{ width: "75vw" }}
+            />
           </Zoom>
-          <Typography> {post.title} </Typography>
-          <Typography>{post.creator} </Typography>
-          <Typography>{post.message} </Typography>
-          <Typography>{post.tags} </Typography>
-          <CardActions>
-            <Button
-              onClick={() => {
-                disPatch(likePost({ id: post._id, index: index }));
-              }}
-            >
-              <ThumbUpAltIcon /> Like {post.likeCount}
-            </Button>
-            <Button
-              onClick={(e) => {
-                e.preventDefault();
-                handleDelete(post._id, index);
-              }}
-            >
-              <DeleteIcon /> Delete
-            </Button>
-          </CardActions>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              setIsEdit(true);
+          <div
+            sx={{
+              display: "flex",
+              alignItems: "flex-start",
             }}
           >
-            edit
-          </button>
+            <Typography> {post.title} </Typography>
+            <Typography>{post.creator} </Typography>
+            <Typography>{post.message} </Typography>
+            <Typography>{post.tags} </Typography>
+            <CardActions>
+              <Button
+                onClick={() => {
+                  disPatch(likePost({ id: post._id, index: index }));
+                }}
+              >
+                <ThumbUpAltIcon /> Like {post.likeCount}
+              </Button>
+              <Button
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleDelete(post._id, index);
+                }}
+              >
+                <DeleteIcon /> Delete
+              </Button>
+              <Button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsEdit(true);
+                }}
+              >
+                <EditIcon />
+                Edit
+              </Button>
+            </CardActions>
+          </div>
         </Card>
       )}
     </>
