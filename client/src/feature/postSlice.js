@@ -35,8 +35,17 @@ export const postSlice = createSlice({
       likeSelectedPost(action.payload.id);
       state.value[action.payload.index].likeCount += 1;
     },
+    searchPost: (state, action) => {
+      state.value = action.payload;
+    },
   },
 });
-export const { createPost, getPosts, deletePost, updatePost, likePost } =
-  postSlice.actions;
+export const {
+  createPost,
+  getPosts,
+  deletePost,
+  updatePost,
+  likePost,
+  searchPost,
+} = postSlice.actions;
 export default postSlice.reducer;

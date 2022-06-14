@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { getPosts } from "../../feature/postSlice";
 import TextField from "@mui/material/TextField";
 import { Button, Paper, Typography } from "@mui/material";
 import { FileContainer, FormContainer, MainContainer } from "./style";
-import { fetchPosts } from "../../api";
 import axios from "axios";
 export default function Form() {
   const [inputData, setInputData] = useState({
@@ -15,23 +12,12 @@ export default function Form() {
     selectedFile: "",
     likeCount: 0,
   });
-  const dispatch = useDispatch();
 
   const handleSubmit = async () => {
     axios.post("http://localhost:5920/posts", inputData).then((res) => {
       if (res.request.status === 201) {
-        fetchPosts().then((res) => {
-          dispatch(getPosts(res.data.at(-1)));
-        });
+        window.location.reload(false);
       }
-    });
-
-    setInputData({
-      title: "",
-      message: "",
-      tags: "",
-      selectedFile: "",
-      creator: JSON.parse(localStorage.getItem("userName")),
     });
   };
   return (

@@ -2,6 +2,8 @@ import axios from "axios";
 
 const url = "http://localhost:5920/posts";
 export const fetchPosts = () => axios.get(url);
+export const fetchPostsBySearch = (searchQuery) =>
+  axios.get(`${url}/search?searchQuery=${searchQuery}`);
 export const createNewPost = (newPost) => {
   axios.post(url, newPost);
 };
